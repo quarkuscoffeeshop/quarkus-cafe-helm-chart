@@ -61,6 +61,17 @@ entries:
     urls:
     - https://github.com/tosin2013/quarkus-cafe-helm-chart/releases/download/quarkus-helm-chart-0.1.0/quarkus-helm-chart-0.1.0.tgz
     version: 0.1.0
+  quarkuscoffeeshop-charts:
+  - apiVersion: v2
+    appVersion: 3.0.1
+    created: "2020-09-24T18:10:51.470753002Z"
+    description: A Helm chart for Kubernetes
+    digest: 99f8696182588e4c31a127e31cfee37f67879a10091aeddebfe352b0127f95e5
+    name: quarkuscoffeeshop-charts
+    type: application
+    urls:
+    - https://github.com/quarkuscoffeeshop/quarkuscoffeeshop-helm/releases/download/quarkuscoffeeshop-charts-2.0.12/quarkuscoffeeshop-charts-2.0.12.tgz
+    version: 2.0.12
   quarkuscoffeeshop-helm:
   - apiVersion: v2
     appVersion: 3.0.1
