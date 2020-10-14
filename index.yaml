@@ -64,6 +64,16 @@ entries:
   quarkuscoffeeshop-charts:
   - apiVersion: v2
     appVersion: 3.0.1
+    created: "2020-10-14T17:06:59.557873272Z"
+    description: A Helm chart for Kubernetes
+    digest: ff0f3b1d9b328fece6aec408c76711e3aa6cfee85c0947c688185511304823c5
+    name: quarkuscoffeeshop-charts
+    type: application
+    urls:
+    - https://github.com/quarkuscoffeeshop/quarkuscoffeeshop-helm/releases/download/quarkuscoffeeshop-charts-3.2.0/quarkuscoffeeshop-charts-3.2.0.tgz
+    version: 3.2.0
+  - apiVersion: v2
+    appVersion: 3.0.1
     created: "2020-09-26T10:16:16.90780474Z"
     description: A Helm chart for Kubernetes
     digest: 2712b4044a2776d295dab9101c37a85457d4d50dd7bed834f2a1f5919221828d
