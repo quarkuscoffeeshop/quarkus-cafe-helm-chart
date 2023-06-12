@@ -1,0 +1,34 @@
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: {{ .Values.projectnamespace }}-scc
+allowPrivilegedContainer: false
+allowHostDirVolumePlugin: true
+allowedCapabilities:
+  - '*'
+allowedUnsafeSysctls:
+  - '*'
+defaultAddCapabilities: []
+fsGroup:
+  type: RunAsAny
+groups:
+  - system:authenticated
+priority: null
+readOnlyRootFilesystem: false
+requiredDropCapabilities: []
+runAsUser:
+  type: MustRunAs
+  uid: {{ .Values.securityContext.runAsUser }}
+seLinuxContext:
+  type: MustRunAs
+seccompProfiles:
+  - '*'
+supplementalGroups:
+  type: MustRunAs
+  ranges:
+    - max: 65535
+      min: 1
+users:
+  - system:serviceaccount:{{ .Values.projectnamespace }}:{{ .Values.serviceAccount.name }}
+volumes:
+  - '*'

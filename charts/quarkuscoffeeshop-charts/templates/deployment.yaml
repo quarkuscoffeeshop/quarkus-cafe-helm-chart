@@ -27,6 +27,10 @@ spec:
         - name: quarkuscoffeeshop-barista
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-barista:{{ .Values.version.barista }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8778
               protocol: TCP
@@ -35,6 +39,7 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP_URLS
               value: {{ .Values.kafka_cluster_name }}-kafka-bootstrap:9092
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -65,6 +70,10 @@ spec:
         - name: quarkuscoffeeshop-inventory
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-inventory:{{ .Values.version.inventory }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8778
               protocol: TCP
@@ -73,6 +82,7 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP_URLS
               value: {{ .Values.kafka_cluster_name }}-kafka-bootstrap:9092
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -103,6 +113,10 @@ spec:
         - name: quarkuscoffeeshop-counter
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-counter:{{ .Values.version.counter }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -121,6 +135,7 @@ spec:
               value: {{ .Values.quarkus_log_level }}
             - name: QUARKUSCOFFEESHOP_LOG_LEVEL
               value: {{ .Values.quarkuscoffeeshop_log_level }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -151,12 +166,17 @@ spec:
         - name: quarkuscoffeeshop-customermocker
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-customermocker:{{ .Values.version.customermocker }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
           env:
             - name: REST_URL
               value: http://quarkuscoffeeshop-web-{{ .Values.projectnamespace }}.apps.{{ .Values.domain }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -187,12 +207,17 @@ spec:
         - name: quarkuscoffeeshop-kitchen
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-kitchen:{{ .Values.version.kitchen }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
           env:
             - name: KAFKA_BOOTSTRAP_URLS
               value: {{ .Values.kafka_cluster_name }}-kafka-bootstrap:9092
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -223,6 +248,10 @@ spec:
         - name: quarkuscoffeeshop-customerloyalty
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-customerloyalty:{{ .Values.version.customerloyalty }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -231,6 +260,7 @@ spec:
               value: {{ .Values.kafka_cluster_name }}-kafka-bootstrap:9092
             - name: QUARKUS_LOG_LEVEL
               value: {{ .Values.quarkus_log_level }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -261,6 +291,10 @@ spec:
         - name: quarkuscoffeeshop-web
           image: quay.io/quarkuscoffeeshop/quarkuscoffeeshop-web:{{ .Values.version.web }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.securityContext }}
+          securityContext:
+{{ toYaml .Values.securityContext | indent 12 }}
+{{- end }}
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -277,3 +311,4 @@ spec:
               value: http://quarkuscoffeeshop-web-{{ .Values.projectnamespace }}.apps.{{ .Values.domain }}
             - name: STORE_ID
               value: {{ .Values.storeid }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
